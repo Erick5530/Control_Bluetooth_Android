@@ -211,7 +211,8 @@ class MainActivity : AppCompatActivity() {
             )
             mConnectedThread!!.start()
 
-            mConnectedThread!!.write("x")
+            mConnectedThread!!.write("6")
+            mConnectedThread!!.write("0")
         } catch (e: java.lang.Exception) {
             try {
                 btSocket!!.close()
