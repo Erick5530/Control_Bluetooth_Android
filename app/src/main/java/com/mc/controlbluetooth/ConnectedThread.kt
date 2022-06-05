@@ -11,7 +11,6 @@ import java.io.OutputStream
 class ConnectedThread(
     private var context: Context,
     socket: BluetoothSocket,
-    private var bluetoothIn: Handler,
     private var handlerState:Int
 
 ) : Thread()  {
@@ -27,10 +26,9 @@ class ConnectedThread(
             println("Escuchandoooo")
             try {
                 bytes = mmInStream!!.read(buffer) //read bytes from input buffer
-                val readMessage = String(buffer, 0, bytes)
-                // Send the obtained bytes to the UI Activity via handler
-                bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget()
+
             } catch (e: IOException) {
+                e.printStackTrace()
                 break
             }
         }
@@ -42,6 +40,7 @@ class ConnectedThread(
         try {
             mmOutStream!!.write(msgBuffer) //write bytes over BT connection via outstream
         } catch (e: IOException) {
+            e.printStackTrace()
             //if you cannot write, close the application
             Toast.makeText(context, "La Conexión fallo", Toast.LENGTH_LONG).show()
             //finish()

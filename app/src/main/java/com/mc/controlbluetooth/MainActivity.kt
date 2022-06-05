@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         initObjects()
         checkBTState()
         initListeners()
+        connectToBT()
     }
 
     private fun initListeners() {
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                         textUD.text = getString(R.string.arriba)
                         circleAdelante.setColorFilter(ContextCompat.getColor(applicationContext, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
                         circleAtras.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
-                        mConnectedThread?.write("2")
+                        mConnectedThread!!.write("2")
 
                         if(!isAnimation){
                             isAnimation = true
@@ -93,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                         textUD.text = getString(R.string.abajo)
                         circleAdelante.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
                         circleAtras.setColorFilter(ContextCompat.getColor(applicationContext, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
-                        mConnectedThread?.write("3")
+                        mConnectedThread!!.write("3")
 
                         isAnimation = false
                         speedMeter.setSpeed(0, timeAnimateDown)
@@ -111,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                     circleAdelante.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
                     circleAtras.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
                     isAnimation = false
-                    mConnectedThread?.write("0")
+                    mConnectedThread!!.write("0")
                     speedMeter.setSpeed(0, timeAnimateDown)
 
 
@@ -127,12 +128,12 @@ class MainActivity : AppCompatActivity() {
                         textLR.text = getString(R.string.derecha)
                         arrowRigth.setColorFilter(ContextCompat.getColor(applicationContext, R.color.color_arrow), android.graphics.PorterDuff.Mode.SRC_IN)
                         arrowLeft.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
-                        mConnectedThread?.write("4")
+                        mConnectedThread!!.write("4")
                     } else {
                         textLR.text = getString(R.string.izquierda)
                         arrowRigth.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
                         arrowLeft.setColorFilter(ContextCompat.getColor(applicationContext, R.color.color_arrow), android.graphics.PorterDuff.Mode.SRC_IN)
-                        mConnectedThread?.write("5")
+                        mConnectedThread!!.write("5")
                     }
 
 
@@ -146,7 +147,7 @@ class MainActivity : AppCompatActivity() {
                     textLR.text = getString(R.string.cent)
                     arrowRigth.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
                     arrowLeft.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
-                    mConnectedThread?.write("6")
+                    mConnectedThread!!.write("6")
                 }
 
             })
@@ -219,6 +220,11 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+
+
+    }
+
+    private fun connectToBT(){
         try {
 
             val intent = intent
@@ -237,21 +243,21 @@ class MainActivity : AppCompatActivity() {
             mConnectedThread = ConnectedThread(
                 this,
                 btSocket!!,
-                bluetoothIn!!,
                 handlerState
             )
             mConnectedThread!!.start()
 
             mConnectedThread!!.write("6")
             mConnectedThread!!.write("0")
+            println("Socket conectado:::::::::")
         } catch (e: java.lang.Exception) {
             try {
                 btSocket!!.close()
             } catch (e2: Exception) {
                 e2.printStackTrace()
             }
+            e.printStackTrace()
         }
-
     }
 
     override fun onPause() {
