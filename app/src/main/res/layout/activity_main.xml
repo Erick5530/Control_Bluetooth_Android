@@ -84,6 +84,7 @@
             android:layout_alignStart="@+id/analogueUpDown"
             android:layout_alignEnd="@+id/analogueUpDown"
             android:layout_marginTop="10dp"
+            android:text="@string/cent"
             android:textAlignment="center" />
 
         <com.mc.controlbluetooth.AnalogueView
@@ -102,7 +103,15 @@
             android:layout_alignStart="@+id/analogueLeftRigth"
             android:layout_alignEnd="@+id/analogueLeftRigth"
             android:layout_marginTop="10dp"
+            android:text="@string/cent"
             android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/logoCarro"
+            android:src="@drawable/ic_app_control"
+            android:layout_width="150dp"
+            android:layout_centerInParent="true"
+            android:layout_height="100dp"/>
 
     </RelativeLayout>
 

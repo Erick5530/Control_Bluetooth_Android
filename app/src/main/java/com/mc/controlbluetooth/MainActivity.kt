@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -97,8 +98,6 @@ class MainActivity : AppCompatActivity() {
                 override fun onMaxMoveInDirection(polarAngle: Double) {
 
 
-
-
                     if (polarAngle in -1.0..1.0) {
                         textLR.text = getString(R.string.derecha)
                         mConnectedThread?.write("4")
@@ -127,6 +126,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
 
@@ -197,7 +197,7 @@ class MainActivity : AppCompatActivity() {
             val device = btAdapter!!.getRemoteDevice(address)
             btSocket = createBluetoothSocket(device)
         } catch (e: Exception) {
-            Toast.makeText(baseContext, "La creacción del Socket fallo", Toast.LENGTH_LONG).show()
+            Toast.makeText(baseContext, "La creación del Socket fallo", Toast.LENGTH_LONG).show()
         }
         // Establish the Bluetooth socket connection.
         try {
@@ -211,11 +211,6 @@ class MainActivity : AppCompatActivity() {
             )
             mConnectedThread!!.start()
 
-            //I send a character when resuming.beginning transmission to check device is connected
-            //If it is not an exception will be thrown in the write method and finish() will be called
-
-            //I send a character when resuming.beginning transmission to check device is connected
-            //If it is not an exception will be thrown in the write method and finish() will be called
             mConnectedThread!!.write("x")
         } catch (e: java.lang.Exception) {
             try {
