@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Control Bluetooth</string>
+    <string name="si_no_hay_dispositivos_en_la_lista_por_favor_enlaza_tu_dispositivo_en_la_configuraci_n_de_android">Si no hay dispositivos en la lista, por favor enlaza tu dispositivo en la configuración de Android</string>
+    <string name="seleccione_un_dispositivo_btserial">Selecciona tu carro</string>
+    <string name="informaci_n_del_carro">Información del carro:</string>
+    <string name="nombre_del_carro">Nombre del carro:</string>
+    <string name="no_conectado">No conectado…</string>
+    <string name="tipo_de_tarjeta">Tipo de tarjeta:</string>
+    <string name="arriba">Arriba</string>
+    <string name="abajo">Abajo</string>
+    <string name="izquierda">Izquierda</string>
+    <string name="derecha">Derecha</string>
+    <string name="cent">Centro</string>
+    <string name="control_remoto">Control remoto</string>
+</resources>
