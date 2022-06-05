@@ -8,14 +8,16 @@ import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
-import android.os.Message
+import android.view.View
+import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.mc.controlbluetooth.AnalogueView.OnMoveListener
 import com.mc.controlbluetooth.databinding.ActivityMainBinding
 import java.io.IOException
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     private var btAdapter: BluetoothAdapter? = null
     private var btSocket: BluetoothSocket? = null
-    private var recDataString = StringBuilder()
+    //private var recDataString = StringBuilder()
 
     private var mConnectedThread: ConnectedThread? = null
     private var bluetoothIn: Handler? = null
@@ -41,6 +43,9 @@ class MainActivity : AppCompatActivity() {
 
     // String for MAC address
     private var address: String? = null
+    private var isAnimation = false
+    private val timeAnimateUp = 800L
+    private val timeAnimateDown = 300L
 
     private var resultBluetooth =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -74,10 +79,24 @@ class MainActivity : AppCompatActivity() {
 
                     if (polarAngle in -3.0..0.0) {
                         textUD.text = getString(R.string.arriba)
+                        circleAdelante.setColorFilter(ContextCompat.getColor(applicationContext, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+                        circleAtras.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
                         mConnectedThread?.write("2")
+
+                        if(!isAnimation){
+                            isAnimation = true
+                            speedMeter.setSpeed(100, timeAnimateUp)
+                        }
+
+
                     } else {
                         textUD.text = getString(R.string.abajo)
+                        circleAdelante.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
+                        circleAtras.setColorFilter(ContextCompat.getColor(applicationContext, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
                         mConnectedThread?.write("3")
+
+                        isAnimation = false
+                        speedMeter.setSpeed(0, timeAnimateDown)
                     }
 
 
@@ -89,7 +108,13 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onCenter() {
                     textUD.text = getString(R.string.cent)
+                    circleAdelante.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
+                    circleAtras.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
+                    isAnimation = false
                     mConnectedThread?.write("0")
+                    speedMeter.setSpeed(0, timeAnimateDown)
+
+
                 }
             })
 
@@ -100,9 +125,13 @@ class MainActivity : AppCompatActivity() {
 
                     if (polarAngle in -1.0..1.0) {
                         textLR.text = getString(R.string.derecha)
+                        arrowRigth.setColorFilter(ContextCompat.getColor(applicationContext, R.color.color_arrow), android.graphics.PorterDuff.Mode.SRC_IN)
+                        arrowLeft.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
                         mConnectedThread?.write("4")
                     } else {
                         textLR.text = getString(R.string.izquierda)
+                        arrowRigth.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
+                        arrowLeft.setColorFilter(ContextCompat.getColor(applicationContext, R.color.color_arrow), android.graphics.PorterDuff.Mode.SRC_IN)
                         mConnectedThread?.write("5")
                     }
 
@@ -115,6 +144,8 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onCenter() {
                     textLR.text = getString(R.string.cent)
+                    arrowRigth.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
+                    arrowLeft.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
                     mConnectedThread?.write("6")
                 }
 
@@ -127,10 +158,10 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-    }
+            }
 
 
-    private fun initHandler() {
+    /*private fun initHandler() {
 
         bluetoothIn = object : Handler(Looper.myLooper()!!) {
             override fun handleMessage(msg: Message) {
@@ -154,7 +185,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    }
+    }*/
 
     private fun initObjects() {
         val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager

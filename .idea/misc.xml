@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Proyectos_Android_MC/ControlBluetooth/app/src/main/res/drawable/circle_energy.xml" value="0.2345" />
         <entry key="..\:/Proyectos_Android_MC/ControlBluetooth/app/src/main/res/layout/act_device.xml" value="0.33489583333333334" />
-        <entry key="..\:/Proyectos_Android_MC/ControlBluetooth/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Proyectos_Android_MC/ControlBluetooth/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Proyectos_Android_MC/ControlBluetooth/app/src/main/res/layout/device_name.xml" value="0.16302083333333334" />
       </map>
     </option>

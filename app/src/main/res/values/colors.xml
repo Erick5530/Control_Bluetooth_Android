@@ -10,4 +10,8 @@
     <color name="colorPrimary">#0F5685</color>
     <color name="colorPrimaryDark">#00072f</color>
     <color name="colorAccent">#245D7C</color>
+    <color name="gris">#636363</color>
+    <color name="color_arrow">#F8ED20</color>
+    <color name="green">#0CAE21</color>
+    <color name="red">#BF0606</color>
 </resources>

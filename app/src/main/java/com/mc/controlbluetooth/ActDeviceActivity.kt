@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -50,12 +51,20 @@ class ActDeviceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initBinding()
+        checkPermision()
     }
 
     private fun initBinding() {
         binding = ActDeviceBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+    }
+
+    private fun checkPermision(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            Permission(this@ActDeviceActivity).checkPermissions()
+        }
+
     }
 
     // Set up on-click listener for the list (nicked this - unsure)

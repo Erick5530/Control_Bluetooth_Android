@@ -12,4 +12,5 @@
     <string name="derecha">Derecha</string>
     <string name="cent">Centro</string>
     <string name="control_remoto">Control remoto</string>
+    <string name="indicador_adelante">indicador adelante</string>
 </resources>
