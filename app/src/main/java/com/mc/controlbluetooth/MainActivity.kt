@@ -216,13 +216,13 @@ class MainActivity : AppCompatActivity() {
         //creates secure outgoing connecetion with BT device using UUID
     }
 
-
+/*
     override fun onResume() {
         super.onResume()
 
 
 
-    }
+    }*/
 
     private fun connectToBT(){
         try {
@@ -259,7 +259,7 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
+/*
     override fun onPause() {
         super.onPause()
         try {
@@ -271,6 +271,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-    }
+    }*/
 
 }
