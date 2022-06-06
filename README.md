@@ -9,9 +9,9 @@ se modifico el codigo original para añadir un metodo a la interfaz para detecta
 La vista animada del speedmeter esta implementado gracias a la libreria de ibrahimsn98/speedometer:https://github.com/ibrahimsn98/speedometer
 
 El codigo para conectar a los dispositivos bluetooth se baso en el curso http://cursoandroidstudio.blogspot.com/2015/10/conexion-bluetooth-android-con-arduino.html
-el codigo original esta hecho en java la de este proyecto lo pase a kotlin para poder reemplazar apis obsoletas asi como metodo que no funcionan, además, quite la parte 
-en la que el arduino envia informacion y la app lo recibe y lee ya que no era requirido en la funcionalidad principal de mi aplicación.
+el codigo original esta hecho en java la de este proyecto lo pase a kotlin para poder reemplazar apis obsoletas asi como metodos que ya no funcionan de forma correcta actualmente, además, quite la parte 
+en la que el arduino envia información y la app lo recibe y lee, ya que no era requirido en la funcionalidad principal de mi aplicación.
 
-el tamaño de la vista en general de la aplicacion esta diseñada de forma generica a excepcion del speedmeter, ya que esa parte se diseño para un tamaño de pantalla en especifico(Mi celular Redmi note 10 pro) 
+El tamaño de la vista en general de la aplicacion esta diseñada de forma genérica a excepcién del speedmeter, ya que esa parte se diseño para un tamaño de pantalla en especifico(Mi celular Redmi note 10 pro) 
 ya que todas la pruebas y el uso final se haria en este.
 
