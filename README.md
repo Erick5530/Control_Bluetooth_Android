@@ -1,6 +1,6 @@
 # Control_Bluetooth_Android
 
-Aplicacion para establecer conexion con un modulo Bluetooth Hc-05 o Hc-06 (en modo esclavo), esta destinado para manejar un motor de direccion y un motor de arranque 
+Aplicacion para establecer conexion con un modulo Bluetooth Hc-06 o Hc-05 (en modo esclavo), esta destinado para manejar un motor de direccion y un motor de arranque 
 (izquierda, derecha;adelante,atras respectivamente) los valores son byte numericos enviados al puerto com de un Arduino UNO.
 
 Las vistas para los análogos estan basados de la respuesta de este hilo en StackOverFlow https://stackoverflow.com/questions/18661107/android-creating-an-analogue-type-animated-image-for-movement
