@@ -4,7 +4,7 @@ Aplicacion para establecer conexion con un modulo Bluetooth Hc-06 o Hc-05 (en mo
 (izquierda, derecha;adelante,atras respectivamente) los valores son byte numericos enviados al puerto com de un Arduino UNO.
 
 Las vistas para los análogos estan basados de la respuesta de este hilo en StackOverFlow https://stackoverflow.com/questions/18661107/android-creating-an-analogue-type-animated-image-for-movement
-se modifico el codigo original para añadir un metodo a la interfaz para detectar que el analogo volvio al centro.
+se modifico el codigo original para añadir un metodo a la interfaz para detectar que el análogo volvio al centro.
 
 La vista animada del speedmeter esta implementado gracias a la libreria de ibrahimsn98/speedometer:https://github.com/ibrahimsn98/speedometer
 
