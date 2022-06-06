@@ -57,6 +57,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    private var flagSendUp = false
+    private var flagSendDown = false
+    private var flagSendLeft = false
+    private var flagSendRight = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,23 +85,57 @@ class MainActivity : AppCompatActivity() {
 
                     if (polarAngle in -3.0..0.0) {
                         textUD.text = getString(R.string.arriba)
-                        circleAdelante.setColorFilter(ContextCompat.getColor(applicationContext, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
-                        circleAtras.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
-                        mConnectedThread!!.write("2")
+                        circleAdelante.setColorFilter(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.green
+                            ), android.graphics.PorterDuff.Mode.SRC_IN
+                        )
+                        circleAtras.setColorFilter(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.gris
+                            ), android.graphics.PorterDuff.Mode.SRC_IN
+                        )
 
-                        if(!isAnimation){
+                        if (!flagSendUp) {
+                            flagSendUp = true
+                            mConnectedThread!!.write("2")
+                        }
+
+
+
+                        if (!isAnimation) {
                             isAnimation = true
                             speedMeter.setSpeed(100, timeAnimateUp)
                         }
 
+                        flagSendDown = false
+
 
                     } else {
                         textUD.text = getString(R.string.abajo)
-                        circleAdelante.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
-                        circleAtras.setColorFilter(ContextCompat.getColor(applicationContext, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
-                        mConnectedThread!!.write("3")
+                        circleAdelante.setColorFilter(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.gris
+                            ), android.graphics.PorterDuff.Mode.SRC_IN
+                        )
+                        circleAtras.setColorFilter(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.red
+                            ), android.graphics.PorterDuff.Mode.SRC_IN
+                        )
+
+
+                        if (!flagSendDown) {
+                            flagSendDown = true
+                            mConnectedThread!!.write("3")
+                        }
 
                         isAnimation = false
+                        flagSendUp = false
                         speedMeter.setSpeed(0, timeAnimateDown)
                     }
 
@@ -109,9 +148,22 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onCenter() {
                     textUD.text = getString(R.string.cent)
-                    circleAdelante.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
-                    circleAtras.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
+                    circleAdelante.setColorFilter(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.gris
+                        ), android.graphics.PorterDuff.Mode.SRC_IN
+                    )
+                    circleAtras.setColorFilter(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.gris
+                        ), android.graphics.PorterDuff.Mode.SRC_IN
+                    )
                     isAnimation = false
+                    flagSendUp = false
+                    flagSendDown = false
+
                     mConnectedThread!!.write("0")
                     speedMeter.setSpeed(0, timeAnimateDown)
 
@@ -126,14 +178,50 @@ class MainActivity : AppCompatActivity() {
 
                     if (polarAngle in -1.0..1.0) {
                         textLR.text = getString(R.string.derecha)
-                        arrowRigth.setColorFilter(ContextCompat.getColor(applicationContext, R.color.color_arrow), android.graphics.PorterDuff.Mode.SRC_IN)
-                        arrowLeft.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
-                        mConnectedThread!!.write("4")
+                        arrowRigth.setColorFilter(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.color_arrow
+                            ), android.graphics.PorterDuff.Mode.SRC_IN
+                        )
+                        arrowLeft.setColorFilter(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.gris
+                            ), android.graphics.PorterDuff.Mode.SRC_IN
+                        )
+
+                        if (!flagSendRight) {
+                            flagSendRight = true
+                            mConnectedThread!!.write("4")
+                        }
+
+                        flagSendLeft = false
+
+
                     } else {
                         textLR.text = getString(R.string.izquierda)
-                        arrowRigth.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
-                        arrowLeft.setColorFilter(ContextCompat.getColor(applicationContext, R.color.color_arrow), android.graphics.PorterDuff.Mode.SRC_IN)
-                        mConnectedThread!!.write("5")
+                        arrowRigth.setColorFilter(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.gris
+                            ), android.graphics.PorterDuff.Mode.SRC_IN
+                        )
+                        arrowLeft.setColorFilter(
+                            ContextCompat.getColor(
+                                applicationContext,
+                                R.color.color_arrow
+                            ), android.graphics.PorterDuff.Mode.SRC_IN
+                        )
+
+                        if (!flagSendLeft) {
+                            flagSendLeft = true
+                            mConnectedThread!!.write("5")
+                        }
+
+                        flagSendRight = false
+
+
                     }
 
 
@@ -145,8 +233,20 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onCenter() {
                     textLR.text = getString(R.string.cent)
-                    arrowRigth.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
-                    arrowLeft.setColorFilter(ContextCompat.getColor(applicationContext, R.color.gris), android.graphics.PorterDuff.Mode.SRC_IN)
+                    arrowRigth.setColorFilter(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.gris
+                        ), android.graphics.PorterDuff.Mode.SRC_IN
+                    )
+                    arrowLeft.setColorFilter(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.gris
+                        ), android.graphics.PorterDuff.Mode.SRC_IN
+                    )
+                    flagSendLeft = false
+                    flagSendRight = false
                     mConnectedThread!!.write("6")
                 }
 
@@ -159,7 +259,7 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-            }
+    }
 
 
     /*private fun initHandler() {
@@ -224,7 +324,7 @@ class MainActivity : AppCompatActivity() {
 
     }*/
 
-    private fun connectToBT(){
+    private fun connectToBT() {
         try {
 
             val intent = intent
